@@ -41,38 +41,73 @@ public class CheckPermutation {
         String str1 = "abc";
         String str2 = "cbd";
 
-        if(str1.length() != str2.length()){
-            System.out.println(false);
-            return;
-        }
+        boolean ans = CheckPermutation(str1,str2);
+        System.out.println(ans);
 
+        
       
 
-        for(int i = 0; i < str1.length(); i++){
-            int count = 0;
-            for(int j = 0; j < str1.length(); j++){
-                if(str1.charAt(i) == str1.charAt(j)){
-                    count++;
-                }
+    
+        
+    }
 
-            }
-            for(int j = 0; j < str2.length(); j++){
-                if(str1.charAt(i) == str2.charAt(j)){
-                    count--;
-                    if(count <= 0){
-                        break;
-                    }
-                }
-            }
-            if(count > 0){
-                System.out.println(false);
-                return;
-            }
+    // public static boolean CheckPermutation(String str1, String str2){
+    //     if(str1.length() != str2.length()){
+    //         return false;
+    //     }
 
+    //         for(int i = 0; i < str1.length(); i++){
+    //         int count = 0;
+    //         for(int j = 0; j < str1.length(); j++){
+    //             if(str1.charAt(i) == str1.charAt(j)){
+    //                 count++;
+    //             }
+
+    //         }
+    //         for(int j = 0; j < str2.length(); j++){
+    //             if(str1.charAt(i) == str2.charAt(j)){
+    //                 count--;
+    //                 if(count <= 0){
+    //                     break;
+    //                 }
+    //             }
+    //         }
+    //         if(count > 0){
+    //             return false;
+    //         }
+
+    //     }
+
+    //     return true;
+    // }
+
+
+
+    //This method has time complexity of O(N);
+    public static boolean CheckPermutation(String str1,String str2){
+        if(str1.length() != str2.length()){
+            return false;
         }
 
-        System.out.println(true);
+        int frequency[] = new int[256];
+
+        for(int i = 0; i < str1.length(); i++){
+            ++frequency[str1.charAt(i)];
+        }
+        for(int i = 0; i < str2.length(); i++){
+            --frequency[str2.charAt(i)];
+        }
+
+        for(int i = 0; i < frequency.length; i++){
+            if(frequency[i] != 0){
+                return false;
+            }
+        }
         
+        
+
+        return true;
+
     }
     
 }
